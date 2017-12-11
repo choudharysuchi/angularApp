@@ -16,6 +16,7 @@ export class AppComponent {
   }
     
   submitData(name) {
+    console.log("done");
     console.log(name);
   }
   
