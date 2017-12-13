@@ -14,13 +14,25 @@ export class BaseFormComponent implements OnInit {
   
   constructor(private custService: CustomerService, private logger: LoggingService) { }
   
-  addCustomer(): void {    
-    var added = this.custService.addCustomer(this.cust);
-    if(added)
-      this.logger.info(`Added ${this.cust.name}`);
-    else
-      this.logger.info(`Not added. validations failed maybe?`);
+  private log(message: string) {
+    this.logger.info('Base-Form: ' + message);
+  }
+  
+  private added(address: string) {
+    if (address) {
+      this.logger.info(`Address: ${address}`);
+    } else
+      this.logger.info(`Error Occured`);
     this.cust = new Customer();
+  }
+  
+  addCustomer(): void {
+    if (!this.cust.name) {
+      this.logger.info('Validations Failded');
+      return;
+    }
+    this.custService.addCustomer(this.cust).subscribe(this.added);
+
   }
   
   ngOnInit() {
