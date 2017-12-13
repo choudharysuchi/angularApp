@@ -21,11 +21,12 @@ export class CustomerService {
     };
   }  
   
-  private serverURL = 'http://primary-dabba-vibhumbhardwaj573796.codeanyapp.com:8080';
+  //private serverURL = 'http://primary-dabba-vibhumbhardwaj573796.codeanyapp.com:8080';
+  private serverURL = 'localhost:8080';
   
   customers: Customer[] = [];
   
-  private log(message: string) {
+  private log(message: string): void {
     this.logger.info('CustomerService: ' + message);
   }
   
@@ -43,11 +44,11 @@ export class CustomerService {
   
   addCustomer(customer: Customer): Observable<string> {
     return this.http.post(`${this.serverURL}/api/createBaseContract`, this.convertRequest(customer) ).pipe(
-      map((res: CreateBaseInstrResponse) => res.newContractAddress),
+      map((res: CreateBaseInstrResponse) => res.contractAddress),
       tap(address => {
         customer.contractAddress = address;
         this.customers.push(customer);
-        this.log(`Smart Contract created successfully`)
+        this.log(`Smart Contract created successfully.`);
       }),
       catchError(this.handleError('createBaseContract', ''))
     );

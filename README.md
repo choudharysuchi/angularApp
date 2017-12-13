@@ -1,3 +1,7 @@
+# _**Important !!**_
+You may need to change `serverURL` variable in customer.service file before continuing. Will not work if API and browser are not running on same system.
+
+
 # AngApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.5.

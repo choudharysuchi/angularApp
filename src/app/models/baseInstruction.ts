@@ -5,5 +5,6 @@ export class CreateBaseInstrRequest {
 }
 
 export class CreateBaseInstrResponse {
-  newContractAddress: string;
+  success: Boolean;
+  contractAddress: string;
 }

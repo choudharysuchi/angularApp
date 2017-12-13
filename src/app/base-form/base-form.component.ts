@@ -9,33 +9,40 @@ import { Customer } from './../models/customer';
   templateUrl: './base-form.component.html',
   styleUrls: ['./base-form.component.css']
 })
+
 export class BaseFormComponent implements OnInit {
-  cust: Customer = new Customer();
+  cust: Customer;
+  title: string;
   
   constructor(private custService: CustomerService, private logger: LoggingService) { }
-  
-  private log(message: string) {
-    this.logger.info('Base-Form: ' + message);
-  }
-  
-  private added(address: string) {
-    if (address) {
-      this.logger.info(`Address: ${address}`);
-    } else
-      this.logger.info(`Error Occured`);
+
+  reset(): void {
+    this.title = 'Enter your Details';
     this.cust = new Customer();
   }
-  
+
+  log(message: string): void {
+    this.logger.info('Base-Form: ' + message);
+  }
+
   addCustomer(): void {
     if (!this.cust.name) {
-      this.logger.info('Validations Failded');
+      this.log('Validations Failded');
       return;
     }
-    this.custService.addCustomer(this.cust).subscribe(this.added);
-
+    this.title = 'Wait a sec';
+    this.custService.addCustomer(this.cust)
+      .subscribe(address => {
+        var msg = (address) ? `Address: ${address}` : `Error Occured while getting address of created contract.`;
+        this.log(msg);
+        this.reset();
+      });
   }
   
+
+
   ngOnInit() {
+    this.reset();
   }
 
 }
