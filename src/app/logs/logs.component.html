@@ -1,0 +1,14 @@
+<div *ngIf="logger.messages.length > 0">
+  <h2>
+    Messages
+  </h2>
+  <button (click)="logger.clear()">
+    Clear All
+  </button>
+  <div *ngFor="let message of logger.messages">
+    {{message}}
+  </div>
+</div>
+<div *ngIf="logger.messages.length == 0">
+     No messages dude. Go Home.
+</div>

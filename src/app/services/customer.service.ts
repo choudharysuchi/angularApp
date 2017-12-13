@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Customer } from '../models/customer';
+import { Customer } from './../models/customer';
 
 @Injectable()
 export class CustomerService {
@@ -10,12 +10,13 @@ export class CustomerService {
     
   }
   
-  addCustomer(customer: Customer) {
-    if(customer.name != '') {
+  addCustomer(customer: Customer): boolean {
+    //alert('m here');
+    if(customer.name) {
       this.customers.push(customer);
-      console.log('Customer added');
+      return true;
     } else {
-      console.log('Nothing to be added');
+      return false;
     }
   }
   
