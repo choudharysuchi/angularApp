@@ -1,0 +1,17 @@
+<header class="header">
+  <h1>{{title}}</h1>
+</header>
+<div (keyup.enter)="addCustomer()">
+  <input [(ngModel)]="cust.name" placeholder="Name">
+  <input [(ngModel)]="cust.dob" placeholder="Date of birth">
+  <input [(ngModel)]="cust.niid" placeholder="National Id">
+</div>
+<div>
+  <button (click)="addCustomer()">
+    GoGoGo
+  </button>
+</div>
+
+<h1 *ngIf="cust.name">
+  Welcome {{ cust.name }}!
+</h1>
